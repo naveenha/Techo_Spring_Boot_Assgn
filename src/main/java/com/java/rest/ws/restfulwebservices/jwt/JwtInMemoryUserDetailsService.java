@@ -12,25 +12,25 @@ import org.springframework.stereotype.Service;
 @Service
 public class JwtInMemoryUserDetailsService implements UserDetailsService {
 
-  static List<JwtUserDetails> inMemoryUserList = new ArrayList<>();
+	static List<JwtUserDetails> inMemoryUserList = new ArrayList<>();
 
-  static {
-    inMemoryUserList.add(new JwtUserDetails(1L, "user",
-        "$2a$10$GE1vdBGzufXUGgfvItpKzO0e2XadrXdEg0lVG3E0EgPAY0YRpkIsy", "ROLE_USER_2"));
-    inMemoryUserList.add(new JwtUserDetails(2L, "user", "$2a$10$DtsHV/R3clKQvC4RqslaCOh2GWstTCi2HRjVSvzpst.XxpiZjyfla", "ROLE_USER_2"));
-    //$2a$10$DtsHV/R3clKQvC4RqslaCOh2GWstTCi2HRjVSvzpst.XxpiZjyfla
-  }
+	static {
+		inMemoryUserList.add(new JwtUserDetails(1L, "user",
+				"$2a$10$GE1vdBGzufXUGgfvItpKzO0e2XadrXdEg0lVG3E0EgPAY0YRpkIsy", "ROLE_USER_2"));
+		inMemoryUserList.add(new JwtUserDetails(2L, "user", "$2a$10$DtsHV/R3clKQvC4RqslaCOh2GWstTCi2HRjVSvzpst.XxpiZjyfla", "ROLE_USER_2"));
+		//$2a$10$DtsHV/R3clKQvC4RqslaCOh2GWstTCi2HRjVSvzpst.XxpiZjyfla
+	}
 
-  @Override
-  public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-    Optional<JwtUserDetails> findFirst = inMemoryUserList.stream()
-        .filter(user -> user.getUsername().equals(username)).findFirst();
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		Optional<JwtUserDetails> findFirst = inMemoryUserList.stream()
+				.filter(user -> user.getUsername().equals(username)).findFirst();
 
-    if (!findFirst.isPresent()) {
-      throw new UsernameNotFoundException(String.format("USER_NOT_FOUND '%s'.", username));
-    }
+		if (!findFirst.isPresent()) {
+			throw new UsernameNotFoundException(String.format("USER_NOT_FOUND '%s'.", username));
+		}
 
-    return findFirst.get();
-  }
+		return findFirst.get();
+	}
 
 }
