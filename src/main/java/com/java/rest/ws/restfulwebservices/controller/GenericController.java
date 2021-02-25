@@ -10,25 +10,25 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.java.rest.ws.restfulwebservices.model.Course;
 import com.java.rest.ws.restfulwebservices.model.Student;
-import com.java.rest.ws.restfulwebservices.service.CourseService;
+import com.java.rest.ws.restfulwebservices.service.GenericService;
 
 @RestController
 public class GenericController {
 	@Autowired
-	CourseService courseService;
+	GenericService genericService;
 
 	@GetMapping("/listOfCoursesByStudentId/{studentId}")
 	public List<Course> listOfCoursesByStudentId(@PathVariable int studentId) {
-		return courseService.listOfCoursesByStudentId(studentId);
+		return genericService.listOfCoursesByStudentId(studentId);
 	}
 
 	@GetMapping("/listOfStudentsByInstructorId/{instructorId}")
 	public Set<Student> listOfStudentsByInstructorId(@PathVariable int instructorId) {
-		return courseService.listOfStudentsByInstructorId(instructorId);
+		return genericService.listOfStudentsByInstructorId(instructorId);
 	}
 
 	@GetMapping("/totalCourseDurationForStudentId/{studentId}")
 	public int totalCourseDurationForStudentId(@PathVariable int studentId) {
-		return courseService.totalCourseDurationForStudentId(studentId);
+		return genericService.totalCourseDurationForStudentId(studentId);
 	}
 }
